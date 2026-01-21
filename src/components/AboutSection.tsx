@@ -32,10 +32,10 @@ export function AboutSection() {
             About the Department
           </h2>
           <p className="text-lg text-muted-foreground leading-relaxed">
-            Established in 2018-19, the Department of Information Technology & Computer Applications 
-            at Andhra University is committed to producing industry-ready professionals through a 
-            balanced emphasis on theoretical foundations and practical applications. Our programs 
-            are designed around outcome-based education principles, fostering innovation and research 
+            Established in 2018-19, the Department of Information Technology & Computer Applications
+            at Andhra University is committed to producing industry-ready professionals through a
+            balanced emphasis on theoretical foundations and practical applications. Our programs
+            are designed around outcome-based education principles, fostering innovation and research
             in emerging technological domains.
           </p>
         </div>
@@ -72,7 +72,7 @@ export function AboutSection() {
             <div className="text-muted-foreground">Academic Programs</div>
           </div>
           <div className="text-center">
-            <div className="text-4xl font-bold text-accent mb-2">9+</div>
+            <div className="text-4xl font-bold text-accent mb-2">4+</div>
             <div className="text-muted-foreground">Expert Faculty</div>
           </div>
         </div>

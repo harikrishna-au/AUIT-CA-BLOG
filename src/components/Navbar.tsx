@@ -26,17 +26,16 @@ export function Navbar() {
     <header className="sticky top-0 z-50 w-full border-b border-border/50 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/80">
       <div className="container flex h-16 items-center justify-between">
         {/* Branding */}
-        <a 
-          href="#" 
+        <a
+          href="#"
           className="flex items-center gap-2 font-heading text-lg font-semibold text-primary"
           onClick={(e) => {
             e.preventDefault();
             window.scrollTo({ top: 0, behavior: "smooth" });
           }}
         >
-          <span className="hidden sm:inline">IT & Computer Applications</span>
+          <span className="hidden sm:inline">INFORMATION TECHNOLOGY & COMPUTER APPLICATIONS</span>
           <span className="sm:hidden">IT&CA</span>
-          <span className="text-muted-foreground font-normal">– AU</span>
         </a>
 
         {/* Desktop Navigation */}

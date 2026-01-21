@@ -13,28 +13,10 @@ export const facultyData: Faculty[] = [
     specialization: "Security, Theory of Computation, Image Processing, Network Security and Cryptography"
   },
   {
-    name: "Prof. Kunjam Nageswara Rao",
-    designation: "Professor",
-    qualification: "Ph.D.",
-    specialization: "Algorithms, Bio-Informatics, Operating Systems"
-  },
-  {
     name: "Dr. M. Ramjee",
     designation: "Professor (Adjunct)",
     qualification: "Ph.D.",
     specialization: null
-  },
-  {
-    name: "Dr. B. Prakash",
-    designation: "Professor (Adhoc)",
-    qualification: "Ph.D.",
-    specialization: "Image Processing & Artificial Intelligence"
-  },
-  {
-    name: "Dr. A. Gautami Latha",
-    designation: "Professor (Adhoc)",
-    qualification: "Ph.D.",
-    specialization: "Semantic Mining & Artificial Intelligence"
   },
   {
     name: "Mr. V. Nagaraju",
@@ -43,22 +25,10 @@ export const facultyData: Faculty[] = [
     specialization: "Distributed Operating Systems, Operations Research, Data Mining & Data Warehousing"
   },
   {
-    name: "Dr. K. Swapna",
-    designation: "Assistant Professor (Adhoc)",
-    qualification: "Ph.D.",
-    specialization: "Data Mining & Machine Learning"
-  },
-  {
-    name: "Dr. Priyanka Kumari Bhansali",
-    designation: "Assistant Professor (Adhoc)",
-    qualification: "Ph.D.",
-    specialization: "Machine Learning & Big Data Analytics"
-  },
-  {
-    name: "Mrs. J. Grace Asha Roy",
-    designation: "Assistant Professor (Adhoc)",
-    qualification: "M.Tech (IT), Pursuing Ph.D.",
-    specialization: "Machine Learning"
+    name: "Suvarna Kumar",
+    designation: "Assistant Professor",
+    qualification: "",
+    specialization: null
   }
 ];
 
