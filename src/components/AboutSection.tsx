@@ -25,7 +25,7 @@ const domains = [
 
 export function AboutSection() {
   return (
-    <section id="about" className="py-20 md:py-28 bg-background">
+    <section id="about" className="py-12 md:py-16 bg-background">
       <div className="container">
         <div className="max-w-3xl mx-auto text-center mb-16">
           <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-6">

@@ -16,7 +16,7 @@ export function FacultySection() {
   });
 
   return (
-    <section id="faculty" className="py-20 md:py-28 bg-background">
+    <section id="faculty" className="pb-20 pt-8 md:pb-28 md:pt-12 bg-background">
       <div className="container">
         <div className="max-w-3xl mx-auto text-center mb-16">
           <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">

@@ -1,5 +1,6 @@
 import { programsData } from "@/data/facultyData";
 import { GraduationCap, BookOpen, Microscope, Clock } from "lucide-react";
+import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
 
 const categoryConfig = {
   undergraduate: {
@@ -21,7 +22,7 @@ const categoryConfig = {
 
 export function ProgramsSection() {
   return (
-    <section id="programs" className="py-20 md:py-28 bg-secondary/30">
+    <section id="programs" className="py-12 md:py-16 bg-secondary/30">
       <div className="container">
         <div className="max-w-3xl mx-auto text-center mb-16">
           <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">
@@ -51,18 +52,22 @@ export function ProgramsSection() {
 
                   <div className="space-y-3">
                     {programs.map((program) => (
-                      <div
+                      <Card
                         key={program.name}
-                        className="p-5 rounded-xl bg-card border border-border/50 shadow-sm hover:shadow-card hover:border-accent/20 transition-all duration-300"
+                        className="transition-all duration-300 hover:shadow-card border-border/50 hover:border-accent/20 bg-card"
                       >
-                        <h4 className="font-medium text-foreground mb-2">
-                          {program.name}
-                        </h4>
-                        <div className="flex items-center gap-2 text-sm text-muted-foreground">
-                          <Clock className="w-4 h-4" />
-                          <span>{program.duration}</span>
-                        </div>
-                      </div>
+                        <CardHeader className="p-5 pb-2">
+                          <CardTitle className="text-base font-medium text-foreground">
+                            {program.name}
+                          </CardTitle>
+                        </CardHeader>
+                        <CardContent className="p-5 pt-0">
+                          <div className="flex items-center gap-2 text-sm text-muted-foreground">
+                            <Clock className="w-4 h-4" />
+                            <span>{program.duration}</span>
+                          </div>
+                        </CardContent>
+                      </Card>
                     ))}
                   </div>
                 </div>

@@ -1,7 +1,45 @@
+import { useRef } from "react";
 import { ArrowDown } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import gsap from "gsap";
+import { useGSAP } from "@gsap/react";
 
 export function HeroSection() {
+  const containerRef = useRef<HTMLDivElement>(null);
+
+  useGSAP(() => {
+    const tl = gsap.timeline({ defaults: { ease: "power3.out" } });
+
+    tl.from(".hero-badge", {
+      y: 20,
+      opacity: 0,
+      duration: 0.8,
+      delay: 0.2
+    })
+      .from(".hero-title", {
+        y: 50,
+        opacity: 0,
+        duration: 1,
+        stagger: 0.2
+      }, "-=0.4")
+      .from(".hero-subtitle", {
+        y: 30,
+        opacity: 0,
+        duration: 0.8
+      }, "-=0.6")
+      .from(".hero-desc", {
+        y: 20,
+        opacity: 0,
+        duration: 0.8
+      }, "-=0.6")
+      .from(".hero-btn", {
+        y: 20,
+        opacity: 0,
+        duration: 0.5,
+        scale: 0.95
+      }, "-=0.4");
+  }, { scope: containerRef });
+
   const scrollToAbout = () => {
     const element = document.querySelector("#about");
     if (element) {
@@ -10,13 +48,13 @@ export function HeroSection() {
   };
 
   return (
-    <section className="relative min-h-[85vh] flex items-center justify-center overflow-hidden gradient-hero">
+    <section className="relative min-h-[85vh] flex items-start justify-center pt-32 md:pt-40 overflow-hidden bg-gradient-to-br from-primary to-violet-700">
       {/* Abstract tech background pattern */}
       <div className="absolute inset-0 opacity-10">
         <div className="absolute top-20 left-10 w-72 h-72 rounded-full bg-accent/30 blur-3xl" />
         <div className="absolute bottom-20 right-10 w-96 h-96 rounded-full bg-accent/20 blur-3xl" />
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] rounded-full bg-primary-foreground/5 blur-3xl" />
-        
+
         {/* Grid pattern */}
         <svg className="absolute inset-0 w-full h-full" xmlns="http://www.w3.org/2000/svg">
           <defs>
@@ -28,34 +66,34 @@ export function HeroSection() {
         </svg>
       </div>
 
-      <div className="container relative z-10 text-center px-4">
+      <div ref={containerRef} className="container relative z-10 text-center px-4">
         <div className="max-w-4xl mx-auto space-y-6">
           {/* Established badge */}
-          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary-foreground/10 border border-primary-foreground/20 text-primary-foreground/80 text-sm font-medium backdrop-blur-sm">
+          <div className="hero-badge inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary-foreground/10 border border-primary-foreground/20 text-primary-foreground/80 text-sm font-medium backdrop-blur-sm">
             <span className="w-2 h-2 rounded-full bg-accent animate-pulse" />
             Established 2018-19
           </div>
 
           {/* Main title */}
-          <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-primary-foreground leading-tight text-balance">
+          <h1 className="hero-title text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-primary-foreground leading-tight text-balance">
             Department of Information Technology & Computer Applications
           </h1>
 
           {/* Subtitle */}
-          <p className="text-lg sm:text-xl md:text-2xl text-primary-foreground/80 font-medium">
+          <p className="hero-subtitle text-lg sm:text-xl md:text-2xl text-primary-foreground/80 font-medium">
             A.U. College of Engineering (A), Andhra University
           </p>
 
           {/* Tagline */}
-          <p className="text-base sm:text-lg text-primary-foreground/60 max-w-2xl mx-auto">
-            Advancing computational excellence through rigorous research, 
+          <p className="hero-desc text-base sm:text-lg text-primary-foreground/60 max-w-2xl mx-auto">
+            Advancing computational excellence through rigorous research,
             industry-aligned curriculum, and outcome-based education
           </p>
 
           {/* CTA */}
-          <div className="pt-6">
-            <Button 
-              size="lg" 
+          <div className="hero-btn pt-6">
+            <Button
+              size="lg"
               variant="secondary"
               className="bg-primary-foreground text-primary hover:bg-primary-foreground/90 font-semibold px-8 py-6 text-lg shadow-lg"
               onClick={scrollToAbout}

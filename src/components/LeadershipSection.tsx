@@ -6,7 +6,7 @@ export function LeadershipSection() {
   const previousHods = leadershipData.filter((leader) => !leader.isCurrent);
 
   return (
-    <section id="leadership" className="py-20 md:py-28 bg-secondary/30">
+    <section id="leadership" className="pb-20 pt-8 md:pb-28 md:pt-12 bg-secondary/30">
       <div className="container">
         <div className="max-w-3xl mx-auto text-center mb-16">
           <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">
@@ -27,7 +27,7 @@ export function LeadershipSection() {
                   Current Head of Department
                 </span>
               </div>
-              
+
               <div className="text-center pt-4">
                 <div className="w-20 h-20 rounded-full bg-accent/10 flex items-center justify-center mx-auto mb-4">
                   <User className="w-10 h-10 text-accent" />
