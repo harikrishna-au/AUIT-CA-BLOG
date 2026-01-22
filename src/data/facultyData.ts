@@ -19,16 +19,16 @@ export const facultyData: Faculty[] = [
     specialization: null
   },
   {
-    name: "Mr. V. Nagaraju",
-    designation: "Assistant Professor (Contract)",
-    qualification: "M.C.A, M.Tech (CST)",
-    specialization: "Distributed Operating Systems, Operations Research, Data Mining & Data Warehousing"
-  },
-  {
     name: "Suvarna Kumar",
     designation: "Assistant Professor",
     qualification: "",
     specialization: null
+  },
+  {
+    name: "Mr. V. Nagaraju",
+    designation: "Assistant Professor (Contract)",
+    qualification: "M.C.A, M.Tech (CST)",
+    specialization: "Distributed Operating Systems, Operations Research, Data Mining & Data Warehousing"
   }
 ];
 
@@ -37,19 +37,22 @@ export const leadershipData = [
     name: "Prof. D. Lalitha Bhaskari",
     designation: "Professor & Head of the Department",
     tenure: "24-12-2025 – Present",
-    isCurrent: true
+    isCurrent: true,
+    role: "HEAD OF DEPARTMENT"
   },
   {
     name: "Prof. Kunjam Nageswara Rao",
     designation: "Professor",
     tenure: "28-11-2022 to 23-12-2025",
-    isCurrent: false
+    isCurrent: false,
+    role: "PREVIOUS HEAD OF THE DEPARTMENT"
   },
   {
     name: "Prof. S. Viziananda Row",
     designation: "Professor",
     tenure: "22-08-2019 to 28-11-2022",
-    isCurrent: false
+    isCurrent: false,
+    role: "FOUNDER HEAD OF THE DEPARTMENT"
   }
 ];
 

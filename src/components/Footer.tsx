@@ -1,101 +1,114 @@
-import { MapPin, Mail, Phone, ExternalLink } from "lucide-react";
+import { MapPin, Mail, Phone, ExternalLink, ArrowUpRight } from "lucide-react";
+import { useNavigate, useLocation } from "react-router-dom";
 
 const quickLinks = [
-  { label: "About", href: "#about" },
-  { label: "Leadership", href: "#leadership" },
-  { label: "Faculty", href: "#faculty" },
-  { label: "Programs", href: "#programs" },
-  { label: "Events", href: "#events" },
+  { label: "About", href: "/#about", type: "scroll" },
+  { label: "Leadership", href: "/leadership", type: "route" },
+  { label: "Faculty", href: "/faculty", type: "route" },
+  { label: "Programs", href: "/programs", type: "route" },
+  { label: "Events", href: "/events", type: "route" },
 ];
 
 export function Footer() {
-  const scrollToSection = (href: string) => {
-    const element = document.querySelector(href);
-    if (element) {
-      element.scrollIntoView({ behavior: "smooth" });
+  const navigate = useNavigate();
+  const location = useLocation();
+
+  const handleNavigation = (href: string, type: string) => {
+    if (type === "route") {
+      navigate(href);
+      window.scrollTo(0, 0);
+    } else {
+      // Handle scroll type
+      if (location.pathname !== "/") {
+        navigate("/");
+        setTimeout(() => {
+          const id = href.split("#")[1];
+          const element = document.getElementById(id);
+          if (element) element.scrollIntoView({ behavior: "smooth" });
+        }, 100);
+      } else {
+        const id = href.split("#")[1];
+        const element = document.getElementById(id);
+        if (element) element.scrollIntoView({ behavior: "smooth" });
+      }
     }
   };
 
   return (
-    <footer id="contact" className="bg-primary text-primary-foreground py-16">
+    <footer id="contact" className="bg-black text-white border-t-2 border-black">
       <div className="container">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10">
-          {/* Department Info */}
-          <div className="lg:col-span-2">
-            <h3 className="text-xl font-bold mb-4">
-              Department of IT & Computer Applications
+
+        {/* Top Section */}
+        <div className="grid grid-cols-1 lg:grid-cols-12 border-b-2 border-white/20">
+
+          {/* Brand Block */}
+          <div className="lg:col-span-5 p-12 border-b-2 lg:border-b-0 lg:border-r-2 border-white/20">
+            <h3 className="font-heading text-3xl font-bold uppercase mb-6 leading-none">
+              Dept. IT & CA<br />
             </h3>
-            <p className="text-primary-foreground/70 mb-4 leading-relaxed">
+            <p className="font-mono text-xs text-white/60 mb-8 max-w-sm">
               A.U. College of Engineering (A)<br />
               Andhra University, Visakhapatnam
             </p>
-            <p className="text-sm text-primary-foreground/60">
-              Established in 2018-19, committed to excellence in education and research 
-              in Information Technology and Computer Applications.
-            </p>
+            <div className="inline-block border border-white px-4 py-2 font-mono text-xs uppercase tracking-widest hover:bg-white hover:text-black transition-colors cursor-default">
+              EST. 2018-19
+            </div>
           </div>
 
-          {/* Quick Links */}
-          <div>
-            <h4 className="font-semibold mb-4">Quick Links</h4>
-            <nav className="space-y-2">
+          {/* Contact Block */}
+          <div className="lg:col-span-4 p-12 border-b-2 lg:border-b-0 lg:border-r-2 border-white/20 bg-accent/5">
+            <h4 className="font-heading text-xl font-bold uppercase mb-6 text-accent">Contact Base</h4>
+            <div className="space-y-6 font-mono text-sm">
+              <div className="flex items-start gap-4">
+                <MapPin className="w-5 h-5 text-accent shrink-0" />
+                <span className="opacity-80">
+                  Andhra University Campus,<br />
+                  Visakhapatnam - 530003
+                </span>
+              </div>
+              <div className="flex items-center gap-4">
+                <Mail className="w-5 h-5 text-accent shrink-0" />
+                <span className="opacity-80">hod.itca@andhrauniversity.edu.in</span>
+              </div>
+              <div className="flex items-center gap-4">
+                <Phone className="w-5 h-5 text-accent shrink-0" />
+                <span className="opacity-80">+91 891 2844000</span>
+              </div>
+            </div>
+          </div>
+
+          {/* Links Block */}
+          <div className="lg:col-span-3 p-12 bg-primary/10">
+            <h4 className="font-heading text-xl font-bold uppercase mb-6 text-primary">Navigation</h4>
+            <nav className="flex flex-col gap-3">
               {quickLinks.map((link) => (
                 <button
                   key={link.label}
-                  onClick={() => scrollToSection(link.href)}
-                  className="block text-primary-foreground/70 hover:text-primary-foreground transition-colors text-sm"
+                  onClick={() => handleNavigation(link.href, link.type)}
+                  className="text-left font-mono text-sm uppercase hover:text-primary hover:tracking-widest transition-all flex items-center justify-between group border-b border-white/10 pb-2"
                 >
                   {link.label}
+                  <ArrowUpRight className="w-3 h-3 opacity-0 group-hover:opacity-100 transition-opacity" />
                 </button>
               ))}
             </nav>
           </div>
-
-          {/* Contact */}
-          <div>
-            <h4 className="font-semibold mb-4">Contact</h4>
-            <div className="space-y-3">
-              <div className="flex items-start gap-3 text-sm">
-                <MapPin className="w-4 h-4 text-accent mt-0.5 flex-shrink-0" />
-                <span className="text-primary-foreground/70">
-                  Andhra University Campus,<br />
-                  Visakhapatnam, Andhra Pradesh,<br />
-                  India - 530003
-                </span>
-              </div>
-              <div className="flex items-center gap-3 text-sm">
-                <Mail className="w-4 h-4 text-accent flex-shrink-0" />
-                <span className="text-primary-foreground/70">
-                  hod.itca@andhrauniversity.edu.in
-                </span>
-              </div>
-              <div className="flex items-center gap-3 text-sm">
-                <Phone className="w-4 h-4 text-accent flex-shrink-0" />
-                <span className="text-primary-foreground/70">
-                  +91 891 2844000
-                </span>
-              </div>
-            </div>
-          </div>
         </div>
 
-        {/* Bottom bar */}
-        <div className="mt-12 pt-8 border-t border-primary-foreground/10">
-          <div className="flex flex-col md:flex-row justify-between items-center gap-4">
-            <p className="text-sm text-primary-foreground/60">
-              © {new Date().getFullYear()} Department of IT & Computer Applications, Andhra University. 
-              All rights reserved.
-            </p>
-            <a
-              href="https://www.andhrauniversity.edu.in"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-1.5 text-sm text-primary-foreground/70 hover:text-primary-foreground transition-colors"
-            >
-              Andhra University
-              <ExternalLink className="w-3.5 h-3.5" />
-            </a>
-          </div>
+        {/* Bottom Bar */}
+        <div className="p-8 flex flex-col md:flex-row justify-between items-center gap-4 font-mono text-xs text-white/40">
+          <p>
+            © {new Date().getFullYear()} DEPT IT & CA. ALL RIGHTS RESERVED.
+          </p>
+          <a
+            href="https://www.andhrauniversity.edu.in"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex items-center gap-2 hover:text-white transition-colors"
+          >
+            ANDHRA UNIVERSITY MAIN SITE
+            <ExternalLink className="w-3 h-3" />
+          </a>
         </div>
       </div>
     </footer>

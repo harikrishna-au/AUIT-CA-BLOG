@@ -1,123 +1,78 @@
+@import url('https://fonts.googleapis.com/css2?family=Jost:wght@300;400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&family=Space+Mono:wght@400;700&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-/* Neo-Academic Design System
-   Aesthetic: Vibrant, Future-Forward, Brilliance
-   Colors in HSL format for variable opacity support
-*/
-
 @layer base {
   :root {
-    /* Core backgrounds - slightly cool/clean */
-    --background: 0 0% 100%;
-    --foreground: 348 40% 10%;
-    /* Very dark red/black for text */
+    /* Bauhaus Theme - "The Construct" */
 
-    /* Cards & surfaces */
-    --card: 0 0% 100%;
-    --card-foreground: 348 40% 10%;
+    /* Background: Stark Beige / Off-White */
+    --background: 40 20% 92%;
+    --foreground: 0 0% 10%;
+    /* Ink Black */
 
-    --popover: 0 0% 100%;
-    --popover-foreground: 348 40% 10%;
+    /* Cards & Surfaces - Flat, Blueprint Style */
+    --card: 40 20% 95%;
+    --card-foreground: 0 0% 10%;
 
-    /* Primary: Academic Red (from Snake/Sun) */
+    --popover: 40 20% 95%;
+    --popover-foreground: 0 0% 10%;
+
+    /* Primary: Bauhaus / University Red */
     --primary: 348 83% 47%;
-    --primary-foreground: 0 0% 100%;
+    --primary-foreground: 40 20% 92%;
 
-    /* Secondary: University Gold (from Circle/Rays) */
-    --secondary: 48 96% 53%;
-    --secondary-foreground: 348 40% 10%;
-    /* Dark text on gold */
+    /* Secondary: Bauhaus Blue */
+    --secondary: 220 90% 40%;
+    --secondary-foreground: 40 20% 92%;
 
-    /* Muted surfaces */
-    --muted: 48 20% 96%;
-    /* Very light cream/gold tint */
-    --muted-foreground: 348 10% 40%;
+    /* Accent: Bauhaus Yellow */
+    --accent: 45 95% 55%;
+    --accent-foreground: 0 0% 10%;
 
-    /* Accent: Nature Green (from Landscape) */
-    --accent: 142 70% 29%;
-    --accent-foreground: 0 0% 100%;
+    /* Muted: Blueprint Grey */
+    --muted: 210 10% 85%;
+    --muted-foreground: 210 10% 40%;
 
     /* Destructive */
-    --destructive: 0 85% 60%;
-    --destructive-foreground: 0 0% 98%;
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 40 20% 92%;
 
-    /* Borders & inputs */
-    --border: 348 10% 90%;
-    --input: 348 10% 90%;
+    /* Borders & Inputs - Strong & Distinct */
+    --border: 0 0% 10%;
+    --input: 0 0% 10%;
     --ring: 348 83% 47%;
 
-    --radius: 0.75rem;
+    --radius: 0px;
+    /* Sharp corners for Bauhaus geometry */
 
-    /* Custom Gradients - Academic */
-    --gradient-hero: linear-gradient(135deg, hsl(348 83% 47%) 0%, hsl(15 80% 50%) 100%);
-    /* Red to Orange */
-    --gradient-accent: linear-gradient(135deg, hsl(48 96% 53%) 0%, hsl(45 90% 60%) 100%);
-    /* Gold */
-    --gradient-glass: linear-gradient(145deg, rgba(255, 255, 255, 0.8) 0%, rgba(255, 255, 255, 0.4) 100%);
-
-    /* Shadows - Soft & Colored */
-    --shadow-sm: 0 1px 2px 0 hsl(348 20% 10% / 0.05);
-    --shadow-md: 0 4px 6px -1px hsl(348 20% 10% / 0.05), 0 2px 4px -2px hsl(348 20% 10% / 0.05);
-    --shadow-lg: 0 10px 15px -3px hsl(348 30% 15% / 0.08), 0 4px 6px -4px hsl(348 30% 15% / 0.08);
-    --shadow-glow: 0 0 20px hsl(348 83% 47% / 0.25);
-
-    /* Sidebar */
-    --sidebar-background: 0 0% 98%;
-    --sidebar-foreground: 348 40% 15%;
-    --sidebar-primary: 348 83% 47%;
-    --sidebar-primary-foreground: 0 0% 100%;
-    --sidebar-accent: 48 30% 95%;
-    --sidebar-accent-foreground: 348 83% 47%;
-    --sidebar-border: 348 10% 90%;
-    --sidebar-ring: 348 83% 47%;
+    /* Layout Variables */
+    --grid-gap: 2rem;
   }
 
   .dark {
-    /* Deep Maroon/Black Background */
-    --background: 348 30% 8%;
-    --foreground: 0 0% 95%;
-
-    --card: 348 25% 12%;
-    --card-foreground: 0 0% 95%;
-
-    --popover: 348 25% 12%;
-    --popover-foreground: 0 0% 95%;
-
-    /* Primary: Bright Red/Pink in Dark Mode for Contrast */
-    --primary: 348 85% 60%;
-    --primary-foreground: 0 0% 100%;
-
-    /* Secondary: Muted Gold */
-    --secondary: 48 70% 30%;
-    --secondary-foreground: 0 0% 100%;
-
-    /* Muted */
-    --muted: 348 20% 18%;
-    --muted-foreground: 348 10% 65%;
-
-    /* Accent: Bright Green */
-    --accent: 142 60% 45%;
-    --accent-foreground: 0 0% 100%;
-
-    --destructive: 0 70% 50%;
-    --destructive-foreground: 0 0% 98%;
-
-    --border: 348 20% 18%;
-    --input: 348 20% 18%;
-    --ring: 348 85% 60%;
-
-    --shadow-glow: 0 0 25px hsl(348 85% 60% / 0.3);
-
-    --sidebar-background: 348 30% 10%;
-    --sidebar-foreground: 0 0% 95%;
-    --sidebar-primary: 348 85% 60%;
-    --sidebar-primary-foreground: 0 0% 100%;
-    --sidebar-accent: 348 20% 20%;
-    --sidebar-accent-foreground: 0 0% 100%;
-    --sidebar-border: 348 20% 20%;
-    --sidebar-ring: 348 85% 60%;
+    /* Inverted Blueprint (if ever needed, but plan implies light/beige) */
+    --background: 220 15% 10%;
+    --foreground: 40 20% 92%;
+    --card: 220 15% 15%;
+    --card-foreground: 40 20% 92%;
+    --popover: 220 15% 15%;
+    --popover-foreground: 40 20% 92%;
+    --primary: 348 83% 47%;
+    --primary-foreground: 40 20% 92%;
+    --secondary: 220 90% 40%;
+    --secondary-foreground: 40 20% 92%;
+    --accent: 45 95% 55%;
+    --accent-foreground: 0 0% 10%;
+    --muted: 220 10% 20%;
+    --muted-foreground: 220 10% 60%;
+    --destructive: 0 62% 30%;
+    --destructive-foreground: 40 20% 92%;
+    --border: 40 20% 92%;
+    --input: 40 20% 92%;
+    --ring: 348 83% 47%;
   }
 }
 
@@ -127,8 +82,7 @@
   }
 
   body {
-    @apply bg-background text-foreground antialiased;
-    font-feature-settings: "cv11", "ss01";
+    @apply bg-background text-foreground antialiased selection:bg-accent selection:text-black;
   }
 
   h1,
@@ -137,29 +91,43 @@
   h4,
   h5,
   h6 {
-    @apply font-heading tracking-tight;
+    @apply font-heading uppercase tracking-tight;
   }
 }
 
 @layer utilities {
-  .glass {
-    @apply bg-white/70 dark:bg-black/40 backdrop-blur-lg border border-white/20 dark:border-white/10 shadow-sm;
+  .bauhaus-grid {
+    background-image:
+      linear-gradient(to right, rgba(0, 0, 0, 0.05) 1px, transparent 1px),
+      linear-gradient(to bottom, rgba(0, 0, 0, 0.05) 1px, transparent 1px);
+    background-size: 40px 40px;
   }
 
-  .glass-card {
-    background: var(--gradient-glass);
-    @apply backdrop-blur-md border border-white/40 shadow-lg;
+  .mech-border {
+    @apply border-2 border-black;
+    box-shadow: 4px 4px 0px 0px rgba(0, 0, 0, 1);
   }
 
-  .gradient-text {
-    @apply bg-clip-text text-transparent bg-gradient-to-r from-primary to-purple-500;
+  .mech-button {
+    @apply border-2 border-black bg-white hover:bg-accent hover:translate-x-[2px] hover:translate-y-[2px] hover:shadow-none transition-all active:translate-x-[4px] active:translate-y-[4px];
+    box-shadow: 4px 4px 0px 0px rgba(0, 0, 0, 1);
   }
 
-  .glow {
-    box-shadow: var(--shadow-glow);
+  .text-blueprint {
+    @apply font-mono text-xs uppercase tracking-widest text-muted-foreground;
   }
 
-  .text-balance {
-    text-wrap: balance;
+  @keyframes marquee {
+    0% {
+      transform: translateX(0);
+    }
+
+    100% {
+      transform: translateX(-50%);
+    }
+  }
+
+  .animate-marquee {
+    animation: marquee 40s linear infinite;
   }
 }

@@ -1,5 +1,5 @@
 import { useRef } from "react";
-import { ArrowDown } from "lucide-react";
+import { ArrowRight, Square, Circle, Zap, Terminal } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
@@ -10,34 +10,66 @@ export function HeroSection() {
   useGSAP(() => {
     const tl = gsap.timeline({ defaults: { ease: "power3.out" } });
 
-    tl.from(".hero-badge", {
-      y: 20,
+    // 1. Elegant Entrance
+    tl.from(".hero-line", {
+      y: 100,
       opacity: 0,
-      duration: 0.8,
-      delay: 0.2
+      duration: 1.2,
+      stagger: 0.15,
     })
-      .from(".hero-title", {
-        y: 50,
-        opacity: 0,
-        duration: 1,
-        stagger: 0.2
-      }, "-=0.4")
       .from(".hero-subtitle", {
-        y: 30,
-        opacity: 0,
-        duration: 0.8
-      }, "-=0.6")
-      .from(".hero-desc", {
         y: 20,
         opacity: 0,
-        duration: 0.8
+        duration: 0.8,
       }, "-=0.6")
       .from(".hero-btn", {
         y: 20,
         opacity: 0,
-        duration: 0.5,
-        scale: 0.95
-      }, "-=0.4");
+        duration: 0.8,
+      }, "-=0.6")
+      .from(".hero-visual-item", {
+        x: 50,
+        opacity: 0,
+        stagger: 0.1,
+        duration: 1.0,
+      }, "-=0.8");
+
+    // 2. Professional Continuous Motion (Subtle Floating)
+    gsap.to(".shape-float", {
+      y: -15,
+      duration: 3,
+      yoyo: true,
+      repeat: -1,
+      ease: "sine.inOut",
+      stagger: {
+        each: 1,
+        from: "random"
+      }
+    });
+
+    // 3. Mouse Parallax Effect
+    const handleMouseMove = (e: MouseEvent) => {
+      const { clientX, clientY } = e;
+      const xPos = (clientX / window.innerWidth - 0.5) * 20;
+      const yPos = (clientY / window.innerHeight - 0.5) * 20;
+
+      gsap.to(".parallax-layer", {
+        x: xPos,
+        y: yPos,
+        duration: 1,
+        ease: "power2.out"
+      });
+      gsap.to(".parallax-layer-reverse", {
+        x: -xPos * 1.5,
+        y: -yPos * 1.5,
+        duration: 1,
+        ease: "power2.out"
+      });
+    };
+
+    window.addEventListener("mousemove", handleMouseMove);
+    return () => window.removeEventListener("mousemove", handleMouseMove);
+
   }, { scope: containerRef });
 
   const scrollToAbout = () => {
@@ -48,65 +80,110 @@ export function HeroSection() {
   };
 
   return (
-    <section className="relative min-h-[85vh] flex items-start justify-center pt-32 md:pt-40 overflow-hidden bg-gradient-to-br from-primary to-violet-700">
-      {/* Abstract tech background pattern */}
-      <div className="absolute inset-0 opacity-10">
-        <div className="absolute top-20 left-10 w-72 h-72 rounded-full bg-accent/30 blur-3xl" />
-        <div className="absolute bottom-20 right-10 w-96 h-96 rounded-full bg-accent/20 blur-3xl" />
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] rounded-full bg-primary-foreground/5 blur-3xl" />
+    <section ref={containerRef} className="relative h-screen bg-background pt-20 overflow-hidden bauhaus-grid flex flex-col">
+      <div className="container px-4 flex-grow flex flex-col justify-center pb-0">
 
-        {/* Grid pattern */}
-        <svg className="absolute inset-0 w-full h-full" xmlns="http://www.w3.org/2000/svg">
-          <defs>
-            <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse">
-              <path d="M 40 0 L 0 0 0 40" fill="none" stroke="currentColor" strokeWidth="0.5" opacity="0.3" />
-            </pattern>
-          </defs>
-          <rect width="100%" height="100%" fill="url(#grid)" />
-        </svg>
-      </div>
+        <div className="grid grid-cols-12 gap-0 border-2 border-black shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] bg-white">
 
-      <div ref={containerRef} className="container relative z-10 text-center px-4">
-        <div className="max-w-4xl mx-auto space-y-6">
-          {/* Established badge */}
-          <div className="hero-badge inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary-foreground/10 border border-primary-foreground/20 text-primary-foreground/80 text-sm font-medium backdrop-blur-sm">
-            <span className="w-2 h-2 rounded-full bg-accent animate-pulse" />
-            Established 2018-19
+          {/* Main Title Block */}
+          <div className="col-span-12 lg:col-span-8 border-b-2 lg:border-b-0 lg:border-r-2 border-black p-8 md:p-16 relative flex flex-col justify-center overflow-hidden">
+
+            <div className="mb-2 overflow-hidden">
+              <h1 className="hero-line font-heading font-bold text-5xl md:text-7xl lg:text-8xl leading-[0.9] tracking-tighter uppercase">
+                Department of
+              </h1>
+            </div>
+            <div className="mb-2 overflow-hidden">
+              <h1 className="hero-line font-heading font-bold text-5xl md:text-7xl lg:text-8xl leading-[0.9] tracking-tighter uppercase text-primary">
+                Information
+              </h1>
+            </div>
+            <div className="mb-8 overflow-hidden">
+              <h1 className="hero-line font-heading font-bold text-5xl md:text-7xl lg:text-8xl leading-[0.9] tracking-tighter uppercase">
+                Technology
+              </h1>
+            </div>
+
+            <p className="hero-subtitle font-mono text-sm md:text-base max-w-md mb-10 border-l-4 border-accent pl-6 uppercase font-bold tracking-wide text-muted-foreground">
+              Empowering Innovation Through<br />
+              <span className="text-foreground">Computational Excellence</span>
+            </p>
+
+            <div className="hero-btn">
+              <Button
+                size="lg"
+                className="mech-button rounded-none text-lg px-8 py-6 bg-white text-black hover:bg-black hover:text-white group border-2 border-black transition-all"
+                onClick={scrollToAbout}
+              >
+                EXPLORE DEPARTMENT <ArrowRight className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform" />
+              </Button>
+            </div>
           </div>
 
-          {/* Main title */}
-          <h1 className="hero-title text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-primary-foreground leading-tight text-balance">
-            Department of Information Technology & Computer Applications
-          </h1>
+          {/* Side Visuals Block */}
+          <div className="col-span-12 lg:col-span-4 flex flex-col">
 
-          {/* Subtitle */}
-          <p className="hero-subtitle text-lg sm:text-xl md:text-2xl text-primary-foreground/80 font-medium">
-            A.U. College of Engineering (A), Andhra University
-          </p>
+            {/* Shapes Block - Professional Motion */}
+            <div className="hero-visual-item h-72 bg-secondary p-8 flex items-center justify-center border-b-2 border-black relative overflow-hidden group">
+              <div className="shape-float parallax-layer-reverse absolute top-8 left-8">
+                <Square className="w-24 h-24 text-white stroke-[1] opacity-20 rotate-12" />
+              </div>
+              <div className="shape-float parallax-layer absolute bottom-8 right-8">
+                <Circle className="w-32 h-32 text-accent stroke-[1] opacity-20" />
+              </div>
 
-          {/* Tagline */}
-          <p className="hero-desc text-base sm:text-lg text-primary-foreground/60 max-w-2xl mx-auto">
-            Advancing computational excellence through rigorous research,
-            industry-aligned curriculum, and outcome-based education
-          </p>
+              <img src="/au-logo-white.png" alt="Andhra University Logo" className="w-48 h-48 object-contain relative z-10 drop-shadow-xl rounded-full bg-white p-2 border-2 border-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] parallax-layer" />
+            </div>
 
-          {/* CTA */}
-          <div className="hero-btn pt-6">
-            <Button
-              size="lg"
-              variant="secondary"
-              className="bg-primary-foreground text-primary hover:bg-primary-foreground/90 font-semibold px-8 py-6 text-lg shadow-lg"
-              onClick={scrollToAbout}
-            >
-              Explore Department
-              <ArrowDown className="ml-2 h-5 w-5" />
-            </Button>
+            {/* Info Block */}
+            <div className="flex-1 bg-accent p-8 flex flex-col justify-between relative hero-visual-item">
+              <div className="space-y-4">
+                <div className="border-2 border-black bg-white p-4 shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:translate-x-[2px] hover:translate-y-[2px] hover:shadow-none transition-all cursor-default">
+                  <div className="flex justify-between items-start mb-1">
+                    <span className="block font-mono text-xs font-bold tracking-widest text-muted-foreground">ESTABLISHED</span>
+                    <Terminal className="w-4 h-4 text-black" />
+                  </div>
+                  <span className="font-heading text-3xl font-bold block">2018-19</span>
+                </div>
+
+                <div className="border-2 border-black bg-white p-4 shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:translate-x-[2px] hover:translate-y-[2px] hover:shadow-none transition-all cursor-default">
+                  <div className="flex justify-between items-start mb-1">
+                    <span className="block font-mono text-xs font-bold tracking-widest text-muted-foreground">ACCREDITATION</span>
+                    <Zap className="w-4 h-4 text-black" />
+                  </div>
+                  <span className="font-heading text-2xl font-bold text-primary block">NAAC A++</span>
+                </div>
+              </div>
+
+              <div className="mt-6 font-mono text-xs font-bold border-t-2 border-black pt-4">
+                A.U. COLLEGE OF ENGINEERING (A)
+                <br />VISAKHAPATNAM
+              </div>
+            </div>
           </div>
         </div>
-      </div>
 
-      {/* Bottom gradient fade */}
-      <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-background to-transparent" />
+        {/* Refined Professional Marquee */}
+        <div className="mt-0 border-x-2 border-b-2 border-black bg-black text-white py-4 overflow-hidden whitespace-nowrap">
+          <div className="animate-marquee inline-block">
+            <span className="mx-8 font-heading text-lg font-bold tracking-wider">ESTABLISHED 2018-19</span>
+            <span className="mx-4 text-accent">★</span>
+            <span className="mx-8 font-heading text-lg font-bold tracking-wider">PROGRAMS: B.TECH (IT) • M.TECH (IT) • MCA • M.SC (CS) • PH.D</span>
+            <span className="mx-4 text-primary">★</span>
+            <span className="mx-8 font-heading text-lg font-bold tracking-wider">INDUSTRY-ORIENTED CURRICULUM</span>
+            <span className="mx-4 text-secondary">★</span>
+            <span className="mx-8 font-heading text-lg font-bold tracking-wider">INTERDISCIPLINARY RESEARCH</span>
+            <span className="mx-4 text-accent">★</span>
+            <span className="mx-8 font-heading text-lg font-bold tracking-wider">STATE-OF-THE-ART LABORATORIES</span>
+            <span className="mx-4 text-primary">★</span>
+            <span className="mx-8 font-heading text-lg font-bold tracking-wider">ESTABLISHED 2018-19</span>
+            <span className="mx-4 text-accent">★</span>
+            <span className="mx-8 font-heading text-lg font-bold tracking-wider">PROGRAMS: B.TECH (IT) • M.TECH (IT) • MCA • M.SC (CS) • PH.D</span>
+            <span className="mx-4 text-secondary">★</span>
+          </div>
+        </div>
+
+      </div>
     </section>
   );
 }

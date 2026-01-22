@@ -3,7 +3,7 @@ import { Target, Lightbulb, ShieldCheck } from "lucide-react";
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -31,90 +31,67 @@ export function VisionMissionSection() {
     }, { scope: containerRef });
 
     return (
-        <section ref={containerRef} className="py-12 md:py-16 bg-secondary/20">
+        <section ref={containerRef} className="py-16 bg-background border-b-2 border-black">
             <div className="container">
-                <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+                <h2 className="font-heading text-4xl font-bold uppercase mb-12 border-l-8 border-primary pl-4">
+                    Strategic <span className="text-primary">Objectives</span>
+                </h2>
+
+                <div className="grid grid-cols-1 lg:grid-cols-3 gap-0 border-2 border-black">
                     {/* Vision */}
-                    <Card className="vision-card border-border/50 shadow-sm hover:shadow-md transition-all">
-                        <CardHeader className="pb-2">
-                            <div className="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center mb-4">
-                                <Lightbulb className="w-6 h-6 text-primary" />
-                            </div>
-                            <CardTitle className="text-2xl font-bold text-foreground">Vision</CardTitle>
-                        </CardHeader>
-                        <CardContent>
-                            <p className="text-muted-foreground leading-relaxed">
-                                Create New Frontiers of Knowledge in Quest for Development of The Humane and Just Society.
-                            </p>
-                        </CardContent>
-                    </Card>
+                    <div className="vision-card p-8 border-b-2 lg:border-b-0 lg:border-r-2 border-black bg-white hover:bg-accent transition-colors group">
+                        <div className="w-16 h-16 border-2 border-black bg-primary flex items-center justify-center mb-6 shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] group-hover:shadow-none group-hover:translate-x-[2px] group-hover:translate-y-[2px] transition-all">
+                            <Lightbulb className="w-8 h-8 text-white" />
+                        </div>
+                        <h3 className="font-heading text-2xl font-bold uppercase mb-4">Vision</h3>
+                        <p className="font-mono text-sm leading-relaxed border-t-2 border-dashed border-black pt-4">
+                            Create New Frontiers of Knowledge in Quest for Development of The Humane and Just Society.
+                        </p>
+                    </div>
 
                     {/* Mission */}
-                    <Card className="vision-card border-border/50 shadow-sm hover:shadow-md transition-all">
-                        <CardHeader className="pb-2">
-                            <div className="w-12 h-12 rounded-lg bg-accent/10 flex items-center justify-center mb-4">
-                                <Target className="w-6 h-6 text-accent" />
-                            </div>
-                            <CardTitle className="text-2xl font-bold text-foreground">Mission</CardTitle>
-                        </CardHeader>
-                        <CardContent>
-                            <ul className="space-y-3 text-muted-foreground">
-                                <li className="flex gap-2">
-                                    <span className="text-accent font-bold">•</span>
-                                    <span>To stimulate the academic for promotion of quality of teaching, learning and research.</span>
-                                </li>
-                                <li className="flex gap-2">
-                                    <span className="text-accent font-bold">•</span>
-                                    <span>To undertake quality-related research studies, consultancy and training programmes.</span>
-                                </li>
-                                <li className="flex gap-2">
-                                    <span className="text-accent font-bold">•</span>
-                                    <span>To foster global competencies among students and to inculcate value system in them.</span>
-                                </li>
-                                <li className="flex gap-2">
-                                    <span className="text-accent font-bold">•</span>
-                                    <span>To promote the use of state-of-the-art technology and quest for excellence.</span>
-                                </li>
-                            </ul>
-                        </CardContent>
-                    </Card>
+                    <div className="vision-card p-8 border-b-2 lg:border-b-0 lg:border-r-2 border-black bg-white hover:bg-accent transition-colors group">
+                        <div className="w-16 h-16 border-2 border-black bg-secondary flex items-center justify-center mb-6 shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] group-hover:shadow-none group-hover:translate-x-[2px] group-hover:translate-y-[2px] transition-all">
+                            <Target className="w-8 h-8 text-white" />
+                        </div>
+                        <h3 className="font-heading text-2xl font-bold uppercase mb-4">Mission</h3>
+                        <ul className="space-y-3 font-mono text-xs border-t-2 border-dashed border-black pt-4">
+                            <li className="flex gap-2">
+                                <span className="font-bold">1.</span>
+                                <span>To stimulate the academic for promotion of quality of teaching, learning and research.</span>
+                            </li>
+                            <li className="flex gap-2">
+                                <span className="font-bold">2.</span>
+                                <span>To undertake quality-related research studies, consultancy and training programmes.</span>
+                            </li>
+                            <li className="flex gap-2">
+                                <span className="font-bold">3.</span>
+                                <span>To foster global competencies among students and to inculcate value system in them.</span>
+                            </li>
+                            <li className="flex gap-2">
+                                <span className="font-bold">4.</span>
+                                <span>To promote the use of state-of-the-art technology and quest for excellence.</span>
+                            </li>
+                        </ul>
+                    </div>
 
                     {/* Quality Policy */}
-                    <Card className="vision-card border-border/50 shadow-sm hover:shadow-md transition-all">
-                        <CardHeader className="pb-2">
-                            <div className="w-12 h-12 rounded-lg bg-green-500/10 flex items-center justify-center mb-4">
-                                <ShieldCheck className="w-6 h-6 text-green-600" />
-                            </div>
-                            <CardTitle className="text-2xl font-bold text-foreground">Quality Policy</CardTitle>
-                        </CardHeader>
-                        <CardContent>
-                            <p className="mb-4 text-muted-foreground">
-                                Andhra University is committed to achieving excellence in teaching, research and consultancy:
-                            </p>
-                            <ul className="space-y-2 text-muted-foreground">
-                                <li className="flex gap-2">
-                                    <span className="text-green-600 font-bold">•</span>
-                                    <span>By imparting globally focused education</span>
-                                </li>
-                                <li className="flex gap-2">
-                                    <span className="text-green-600 font-bold">•</span>
-                                    <span>By creating world class professionals</span>
-                                </li>
-                                <li className="flex gap-2">
-                                    <span className="text-green-600 font-bold">•</span>
-                                    <span>By establishing synergic relationships with industry and society</span>
-                                </li>
-                                <li className="flex gap-2">
-                                    <span className="text-green-600 font-bold">•</span>
-                                    <span>By developing state-of-the-art infrastructure and well-endowed faculty</span>
-                                </li>
-                                <li className="flex gap-2">
-                                    <span className="text-green-600 font-bold">•</span>
-                                    <span>By imparting knowledge through team work and incessant efforts</span>
-                                </li>
+                    <div className="vision-card p-8 bg-white hover:bg-accent transition-colors group">
+                        <div className="w-16 h-16 border-2 border-black bg-white flex items-center justify-center mb-6 shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] group-hover:shadow-none group-hover:translate-x-[2px] group-hover:translate-y-[2px] transition-all">
+                            <ShieldCheck className="w-8 h-8 text-black" />
+                        </div>
+                        <h3 className="font-heading text-2xl font-bold uppercase mb-4">Quality Policy</h3>
+                        <div className="font-mono text-xs border-t-2 border-dashed border-black pt-4">
+                            <p className="mb-2 font-bold uppercase">Andhra University is committed to achieving excellence in teaching, research and consultancy:</p>
+                            <ul className="space-y-1 ml-4 list-disc">
+                                <li>By imparting globally focused education</li>
+                                <li>By creating world class professionals</li>
+                                <li>By establishing synergic relationships with industry and society</li>
+                                <li>By developing state-of-the-art infrastructure and well-endowed faculty</li>
+                                <li>By imparting knowledge through team work and incessant efforts</li>
                             </ul>
-                        </CardContent>
-                    </Card>
+                        </div>
+                    </div>
                 </div>
             </div>
         </section>

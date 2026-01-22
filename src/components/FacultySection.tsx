@@ -1,5 +1,6 @@
 import { facultyData } from "@/data/facultyData";
 import { FacultyCard } from "./FacultyCard";
+import { SectionHeader } from "./SectionHeader";
 
 export function FacultySection() {
   // Sort faculty by hierarchy
@@ -16,16 +17,16 @@ export function FacultySection() {
   });
 
   return (
-    <section id="faculty" className="pb-20 pt-8 md:pb-28 md:pt-12 bg-background">
+    <section id="faculty" className="pb-20 pt-8 md:pb-28 md:pt-12 bg-background bauhaus-grid">
       <div className="container">
-        <div className="max-w-3xl mx-auto text-center mb-16">
-          <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">
-            Our Faculty
-          </h2>
-          <p className="text-lg text-muted-foreground">
-            Distinguished academicians driving excellence in teaching and research
-          </p>
-        </div>
+
+        <SectionHeader
+          index="02"
+          tag="TEAM"
+          title="Our"
+          highlight="Faculty"
+          description="Distinguished academicians driving excellence in teaching, research, and innovation."
+        />
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {sortedFaculty.map((faculty) => (

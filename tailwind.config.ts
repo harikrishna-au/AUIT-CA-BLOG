@@ -12,10 +12,12 @@ export default {
         "2xl": "1280px",
       },
     },
-      extend: {
+    extend: {
       fontFamily: {
-        sans: ["Inter", "system-ui", "sans-serif"],
-        heading: ["Inter", "system-ui", "sans-serif"],
+        sans: ["Jost", "system-ui", "sans-serif"],
+        display: ["Space Grotesk", "sans-serif"],
+        heading: ["Space Grotesk", "sans-serif"],
+        mono: ["Space Mono", "monospace"],
       },
       colors: {
         border: "hsl(var(--border))",

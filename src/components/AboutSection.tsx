@@ -1,79 +1,91 @@
-import { Brain, Database, Cloud, Code2 } from "lucide-react";
+import { BookOpen, GraduationCap, Monitor, Code, Cpu } from "lucide-react";
+import { cn } from "@/lib/utils";
+import { SectionHeader } from "@/components/SectionHeader";
 
-const domains = [
+const programs = [
   {
-    icon: Brain,
-    title: "Artificial Intelligence",
-    description: "Machine learning, neural networks, and intelligent systems research",
+    icon: Monitor,
+    title: "B.Tech",
+    subtitle: "Information Technology",
+    color: "bg-primary", // Red
   },
   {
-    icon: Database,
-    title: "Data Science",
-    description: "Big data analytics, data mining, and statistical computing",
+    icon: Cpu,
+    title: "M.Tech",
+    subtitle: "Information Technology",
+    color: "bg-secondary", // Blue
   },
   {
-    icon: Code2,
-    title: "Software Systems",
-    description: "Software engineering, distributed systems, and application development",
+    icon: Code,
+    title: "MCA",
+    subtitle: "Master of Computer Applications",
+    color: "bg-accent", // Yellow
   },
   {
-    icon: Cloud,
-    title: "Cloud & Emerging Tech",
-    description: "Cloud computing, IoT, and next-generation technologies",
+    icon: BookOpen,
+    title: "M.Sc",
+    subtitle: "Computer Science",
+    color: "bg-black", // Black
+  },
+  {
+    icon: GraduationCap,
+    title: "Ph.D",
+    subtitle: "Doctoral Programme",
+    color: "bg-white", // White (with black border/text handling)
   },
 ];
 
 export function AboutSection() {
   return (
-    <section id="about" className="py-12 md:py-16 bg-background">
+    <section id="about" className="py-20 bg-accent bauhaus-grid border-b-2 border-black">
       <div className="container">
-        <div className="max-w-3xl mx-auto text-center mb-16">
-          <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-6">
-            About the Department
-          </h2>
-          <p className="text-lg text-muted-foreground leading-relaxed">
-            Established in 2018-19, the Department of Information Technology & Computer Applications
-            at Andhra University is committed to producing industry-ready professionals through a
-            balanced emphasis on theoretical foundations and practical applications. Our programs
-            are designed around outcome-based education principles, fostering innovation and research
-            in emerging technological domains.
-          </p>
-        </div>
+        <SectionHeader
+          index="01"
+          tag="OVERVIEW"
+          title="About The"
+          highlight="Department"
+          description="Fostering excellence in Information Technology and Computer Applications through innovative curriculum and research since 2018."
+        />
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
 
-        {/* Domain cards */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-          {domains.map((domain, index) => (
-            <div
-              key={domain.title}
-              className="group p-6 rounded-xl bg-card border border-border/50 shadow-card hover:shadow-lg hover:border-accent/30 transition-all duration-300"
-              style={{ animationDelay: `${index * 100}ms` }}
-            >
-              <div className="w-12 h-12 rounded-lg bg-accent/10 flex items-center justify-center mb-4 group-hover:bg-accent/20 transition-colors">
-                <domain.icon className="w-6 h-6 text-accent" />
-              </div>
-              <h3 className="text-lg font-semibold text-foreground mb-2">
-                {domain.title}
-              </h3>
-              <p className="text-sm text-muted-foreground">
-                {domain.description}
-              </p>
+          {/* Text Content */}
+          <div className="bg-white border-2 border-black p-8 md:p-12 shadow-[8px_8px_0px_0px_rgba(0,0,0,1)]">
+            <p className="font-mono text-sm md:text-sm leading-relaxed mb-6 text-justify">
+              The Department of Information Technology and Computer Applications was formed in the academic year <span className="font-bold bg-accent px-1">2018-2019</span>. This department offers one U.G. program (B.Tech. - Information Technology), three P.G. programs (M.Tech. - Information Technology, Master of Computer Applications (MCA), M.Sc. (Computer Science)) and Doctoral programme (Ph.D).
+            </p>
+            <p className="font-mono text-sm md:text-sm leading-relaxed mb-6 text-justify">
+              The Department of Information Technology and Computer Applications has designed a curriculum to apply concepts of Information Technology in collaboration with various inter disciplinary areas. The aim is to create IT professionals with good knowledge on core computer science subjects and skills meeting the current needs of the industry. The department has good infrastructure, computing equipment and laboratories. The faculty of the department have rich teaching and research experience.
+            </p>
+            <p className="font-mono text-sm md:text-sm leading-relaxed text-justify">
+              The students are admitted through a state level common entrance examination. Even though it is an young department, students are well placed in reputed software companies and department is very active in organizing workshops, seminars and training programs. The programs offered in the department meet requirements of both the industry and academia.
+            </p>
+          </div>
+
+          {/* Programs Grid */}
+          <div>
+            <h3 className="font-heading text-2xl font-bold uppercase mb-6 bg-black text-white inline-block px-4 py-2 border-2 border-black">
+              Programs Offered
+            </h3>
+            <div className="grid grid-cols-1 gap-4">
+              {programs.map((program) => (
+                <div
+                  key={program.title}
+                  className="group border-2 border-black bg-white p-6 hover:bg-background transition-all hover:-translate-y-1 hover:shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] flex items-center gap-6"
+                >
+                  <div className={cn("w-12 h-12 border-2 border-black flex items-center justify-center shrink-0 transition-transform group-hover:rotate-12", program.color)}>
+                    <program.icon className={cn("w-6 h-6", program.color === "bg-accent" || program.color === "bg-white" ? "text-black" : "text-white")} />
+                  </div>
+                  <div>
+                    <h3 className="font-heading text-xl font-bold uppercase leading-none">
+                      {program.title}
+                    </h3>
+                    <p className="font-mono text-xs text-muted-foreground uppercase tracking-wider">
+                      {program.subtitle}
+                    </p>
+                  </div>
+                </div>
+              ))}
             </div>
-          ))}
-        </div>
-
-        {/* Key points */}
-        <div className="mt-16 grid grid-cols-1 md:grid-cols-3 gap-8 max-w-4xl mx-auto">
-          <div className="text-center">
-            <div className="text-4xl font-bold text-accent mb-2">6+</div>
-            <div className="text-muted-foreground">Years of Excellence</div>
-          </div>
-          <div className="text-center">
-            <div className="text-4xl font-bold text-accent mb-2">5+</div>
-            <div className="text-muted-foreground">Academic Programs</div>
-          </div>
-          <div className="text-center">
-            <div className="text-4xl font-bold text-accent mb-2">4+</div>
-            <div className="text-muted-foreground">Expert Faculty</div>
           </div>
         </div>
       </div>
