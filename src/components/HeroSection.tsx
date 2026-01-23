@@ -80,7 +80,7 @@ export function HeroSection() {
   };
 
   return (
-    <section ref={containerRef} className="relative h-screen bg-background pt-20 overflow-hidden bauhaus-grid flex flex-col">
+    <section ref={containerRef} className="relative min-h-screen bg-background pt-20 overflow-hidden bauhaus-grid flex flex-col">
       <div className="container px-4 flex-grow flex flex-col justify-center pb-0">
 
         <div className="grid grid-cols-12 gap-0 border-2 border-black shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] bg-white">
