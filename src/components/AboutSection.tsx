@@ -40,7 +40,7 @@ export function AboutSection() {
     <section id="about" className="py-20 bg-accent bauhaus-grid border-b-2 border-black">
       <div className="container">
         <SectionHeader
-          index="01"
+          index="00"
           tag="OVERVIEW"
           title="About The"
           highlight="Department"

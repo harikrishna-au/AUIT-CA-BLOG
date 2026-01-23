@@ -25,7 +25,7 @@ export function SectionHeader({
                 {/* Left Block: Title */}
                 <div className="relative">
                     {/* Floating Index Number - Background */}
-                    <span className="absolute -top-12 -left-4 text-9xl font-heading font-bold text-muted/20 select-none z-0 pointer-events-none">
+                    <span className="hidden md:block absolute -top-12 -left-4 text-9xl font-heading font-bold text-muted/20 select-none z-0 pointer-events-none">
                         {index}
                     </span>
 

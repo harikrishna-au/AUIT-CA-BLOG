@@ -36,7 +36,7 @@ export function VisionMissionSection() {
         <section ref={containerRef} className="py-16 bg-background border-b-2 border-black">
             <div className="container">
                 <SectionHeader
-                    index="03"
+                    index="00"
                     tag="STRATEGY"
                     title="Strategic"
                     highlight="Objectives"
