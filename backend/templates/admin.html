@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Panel - IT & CA Department</title>
+    <link rel="stylesheet" href="/static/admin.css">
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <header class="header">
+            <div class="header-content">
+                <h1 class="title">Admin Panel</h1>
+                <p class="subtitle">IT & Computer Applications Department</p>
+            </div>
+        </header>
+
+        <!-- Tab Navigation -->
+        <div class="tabs">
+            <button class="tab-btn active" data-tab="events">Events Management</button>
+            <button class="tab-btn" data-tab="faculty">Faculty Management</button>
+        </div>
+
+        <!-- EVENTS TAB -->
+        <div id="events-tab" class="tab-content active">
+            <!-- Upload Form -->
+            <section class="upload-section">
+                <h2 class="section-title">Upload New Event</h2>
+                <form id="eventForm" class="event-form">
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label for="event-title">Event Title *</label>
+                            <input type="text" id="event-title" name="title" required placeholder="e.g., AI Hackathon 2026">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="event-date">Event Date *</label>
+                            <input type="date" id="event-date" name="date" required>
+                        </div>
+
+                        <div class="form-group full-width">
+                            <label for="event-description">Description *</label>
+                            <textarea id="event-description" name="description" rows="4" required placeholder="Brief description of the event..."></textarea>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="event-category">Category *</label>
+                            <select id="event-category" name="category" required>
+                                <option value="">Select Category</option>
+                                <option value="Workshop">Workshop</option>
+                                <option value="Hackathon">Hackathon</option>
+                                <option value="Conference">Conference</option>
+                                <option value="Seminar">Seminar</option>
+                                <option value="Cultural">Cultural</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="event-image">Event Image</label>
+                            <input type="file" id="event-image" name="image" accept="image/*">
+                            <div id="eventImagePreview" class="image-preview"></div>
+                        </div>
+                    </div>
+
+                    <button type="submit" class="btn-submit">
+                        <span id="eventSubmitText">Upload Event</span>
+                        <span id="eventSubmitLoader" class="loader" style="display: none;"></span>
+                    </button>
+                </form>
+
+                <!-- Status Message -->
+                <div id="eventStatusMessage" class="status-message"></div>
+            </section>
+
+            <!-- Events List -->
+            <section class="events-section">
+                <h2 class="section-title">Existing Events</h2>
+                <div id="eventsList" class="events-list">
+                    <div class="loading">Loading events...</div>
+                </div>
+            </section>
+        </div>
+
+        <!-- FACULTY TAB -->
+        <div id="faculty-tab" class="tab-content">
+            <!-- Upload Form -->
+            <section class="upload-section">
+                <h2 class="section-title">Add New Faculty</h2>
+                <form id="facultyForm" class="event-form">
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label for="faculty-name">Name *</label>
+                            <input type="text" id="faculty-name" name="name" required placeholder="e.g., Dr. John Doe">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="faculty-designation">Designation *</label>
+                            <input type="text" id="faculty-designation" name="designation" required placeholder="e.g., Professor">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="faculty-department">Department</label>
+                            <input type="text" id="faculty-department" name="department" placeholder="e.g., Computer Science">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="faculty-email">Email</label>
+                            <input type="email" id="faculty-email" name="email" placeholder="e.g., john@example.com">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="faculty-phone">Phone</label>
+                            <input type="tel" id="faculty-phone" name="phone" placeholder="e.g., +91 1234567890">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="faculty-specialization">Specialization</label>
+                            <input type="text" id="faculty-specialization" name="specialization" placeholder="e.g., AI & Machine Learning">
+                        </div>
+
+                        <div class="form-group full-width">
+                            <label for="faculty-image">Photo</label>
+                            <input type="file" id="faculty-image" name="image" accept="image/*">
+                            <div id="facultyImagePreview" class="image-preview"></div>
+                        </div>
+                    </div>
+
+                    <button type="submit" class="btn-submit">
+                        <span id="facultySubmitText">Add Faculty</span>
+                        <span id="facultySubmitLoader" class="loader" style="display: none;"></span>
+                    </button>
+                </form>
+
+                <!-- Status Message -->
+                <div id="facultyStatusMessage" class="status-message"></div>
+            </section>
+
+            <!-- Faculty List -->
+            <section class="events-section">
+                <h2 class="section-title">Existing Faculty</h2>
+                <div id="facultyList" class="events-list">
+                    <div class="loading">Loading faculty...</div>
+                </div>
+            </section>
+        </div>
+
+        <!-- Edit Modal -->
+        <div id="editModal" class="modal">
+            <div class="modal-content">
+                <span class="close">&times;</span>
+                <h2 id="modalTitle" class="section-title">Edit Item</h2>
+                <form id="editForm" class="event-form">
+                    <div id="editFormFields"></div>
+                    <button type="submit" class="btn-submit">
+                        <span id="editSubmitText">Update</span>
+                        <span id="editSubmitLoader" class="loader" style="display: none;"></span>
+                    </button>
+                </form>
+                <div id="editStatusMessage" class="status-message"></div>
+            </div>
+        </div>
+    </div>
+
+    <script src="/static/admin.js"></script>
+</body>
+</html>

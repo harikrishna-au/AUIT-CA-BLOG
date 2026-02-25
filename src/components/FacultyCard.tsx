@@ -1,5 +1,5 @@
-import type { Faculty } from "@/data/facultyData";
-import { User, GraduationCap, BookOpen, Mail } from "lucide-react";
+import type { Faculty } from "@/services/api";
+import { User, BookOpen, Mail, Phone, Building2 } from "lucide-react";
 import {
   Card,
   CardHeader,
@@ -22,14 +22,22 @@ export function FacultyCard({ faculty, isHod }: FacultyCardProps) {
         }`}
     >
       <CardHeader className="flex flex-row items-center gap-4 pb-2">
-        <div
-          className={`w-14 h-14 rounded-full flex items-center justify-center flex-shrink-0 ${isHod ? "bg-accent/15" : "bg-muted"
-            }`}
-        >
-          <User
-            className={`w-7 h-7 ${isHod ? "text-accent" : "text-muted-foreground"}`}
+        {faculty.image_url ? (
+          <img
+            src={faculty.image_url}
+            alt={faculty.name}
+            className={`w-14 h-14 rounded-full object-cover flex-shrink-0 ${isHod ? "ring-2 ring-accent/30" : ""}`}
           />
-        </div>
+        ) : (
+          <div
+            className={`w-14 h-14 rounded-full flex items-center justify-center flex-shrink-0 ${isHod ? "bg-accent/15" : "bg-muted"
+              }`}
+          >
+            <User
+              className={`w-7 h-7 ${isHod ? "text-accent" : "text-muted-foreground"}`}
+            />
+          </div>
+        )}
         <div className="space-y-1">
           <CardTitle className="text-lg">{faculty.name}</CardTitle>
           <CardDescription
@@ -40,10 +48,12 @@ export function FacultyCard({ faculty, isHod }: FacultyCardProps) {
         </div>
       </CardHeader>
       <CardContent className="space-y-2 pt-4">
-        <div className="flex items-center gap-2 text-sm">
-          <GraduationCap className="w-4 h-4 text-muted-foreground flex-shrink-0" />
-          <span className="text-muted-foreground">{faculty.qualification}</span>
-        </div>
+        {faculty.department && (
+          <div className="flex items-center gap-2 text-sm">
+            <Building2 className="w-4 h-4 text-muted-foreground flex-shrink-0" />
+            <span className="text-muted-foreground">{faculty.department}</span>
+          </div>
+        )}
 
         {faculty.specialization && (
           <div className="flex items-start gap-2 text-sm">
@@ -59,6 +69,15 @@ export function FacultyCard({ faculty, isHod }: FacultyCardProps) {
             <Mail className="w-4 h-4 text-muted-foreground flex-shrink-0" />
             <a href={`mailto:${faculty.email}`} className="text-muted-foreground hover:text-accent transition-colors break-all">
               {faculty.email}
+            </a>
+          </div>
+        )}
+
+        {faculty.phone && (
+          <div className="flex items-center gap-2 text-sm">
+            <Phone className="w-4 h-4 text-muted-foreground flex-shrink-0" />
+            <a href={`tel:${faculty.phone}`} className="text-muted-foreground hover:text-accent transition-colors">
+              {faculty.phone}
             </a>
           </div>
         )}

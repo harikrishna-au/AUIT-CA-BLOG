@@ -1,8 +1,9 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Navbar } from "@/components/Navbar";
 import { Footer } from "@/components/Footer";
-import { eventsData, Event } from "@/data/eventsData";
-import { Calendar, MapPin, Clock } from "lucide-react";
+import { Event } from "@/data/eventsData";
+import { fetchEvents } from "@/services/api";
+import { Calendar } from "lucide-react";
 import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
 import { cn } from "@/lib/utils";
 import { SectionHeader } from "@/components/SectionHeader";
@@ -16,7 +17,37 @@ import {
 import { Button } from "@/components/ui/button";
 
 const Events = () => {
+    const [events, setEvents] = useState<Event[]>([]);
+    const [loading, setLoading] = useState(true);
+    const [error, setError] = useState<string | null>(null);
     const [selectedEvent, setSelectedEvent] = useState<Event | null>(null);
+
+    useEffect(() => {
+        loadEvents();
+    }, []);
+
+    const loadEvents = async () => {
+        try {
+            setLoading(true);
+            setError(null);
+            const data = await fetchEvents();
+            setEvents(data);
+        } catch (err) {
+            setError('Failed to load events. Please try again later.');
+            console.error(err);
+        } finally {
+            setLoading(false);
+        }
+    };
+
+    const formatDate = (dateString: string) => {
+        const date = new Date(dateString);
+        return date.toLocaleDateString('en-US', {
+            year: 'numeric',
+            month: 'long',
+            day: 'numeric'
+        });
+    };
 
     return (
         <div className="min-h-screen bg-background">
@@ -34,71 +65,97 @@ const Events = () => {
                             className="mb-16"
                         />
 
-                        {/* Events Grid */}
-                        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                            {eventsData.map((event) => (
-                                <Card
-                                    key={event.id}
-                                    className={cn(
-                                        "group hover:-translate-y-2 transition-transform duration-300 flex flex-col h-full cursor-pointer",
-                                        event.status === "Completed" ? "opacity-75" : "opacity-100"
-                                    )}
-                                    onClick={() => setSelectedEvent(event)}
-                                >
-                                    <CardHeader className="border-b-2 border-black bg-background/50 relative overflow-hidden p-0">
-                                        <div className="absolute top-0 right-0 bg-black text-white px-3 py-1 font-mono text-xs font-bold uppercase border-l-2 border-b-2 border-black z-10">
-                                            {event.status}
-                                        </div>
-                                        {event.image && (
-                                            <div className="w-full h-48 overflow-hidden border-b-2 border-black">
-                                                <img
-                                                    src={event.image}
-                                                    alt={event.title}
-                                                    className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
-                                                />
-                                            </div>
-                                        )}
-                                        <div className="p-6 pb-2">
-                                            <CardTitle className="text-2xl leading-tight mb-2">
-                                                {event.title}
-                                            </CardTitle>
-                                            <div className="flex items-center gap-2">
-                                                <span className={cn(
-                                                    "px-2 py-0.5 text-xs font-bold border border-black uppercase",
-                                                    event.category === "Hackathon" && "bg-primary text-white",
-                                                    event.category === "Workshop" && "bg-secondary text-white",
-                                                    event.category === "Seminar" && "bg-accent text-black",
-                                                    event.category === "Conference" && "bg-muted text-black",
-                                                    event.category === "Cultural" && "bg-black text-white"
-                                                )}>
-                                                    {event.category}
-                                                </span>
-                                            </div>
-                                        </div>
-                                    </CardHeader>
-                                    <CardContent className="p-6 flex-grow flex flex-col justify-between">
-                                        <p className="font-mono text-sm mb-6 text-justify leading-relaxed line-clamp-3">
-                                            {event.description}
-                                        </p>
+                        {/* Loading State */}
+                        {loading && (
+                            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                                {[1, 2, 3].map((i) => (
+                                    <div key={i} className="border-4 border-black bg-white p-6 animate-pulse">
+                                        <div className="h-48 bg-gray-200 mb-4"></div>
+                                        <div className="h-6 bg-gray-200 mb-2"></div>
+                                        <div className="h-4 bg-gray-200"></div>
+                                    </div>
+                                ))}
+                            </div>
+                        )}
 
-                                        <div className="space-y-3 pt-4 border-t-2 border-dashed border-black/20 mt-auto">
-                                            <div className="flex items-center gap-3">
-                                                <Calendar className="w-5 h-5 text-primary" />
-                                                <span className="font-heading font-bold">{event.date}</span>
+                        {/* Error State */}
+                        {error && !loading && (
+                            <div className="text-center py-20">
+                                <div className="border-4 border-black bg-white p-12 inline-block">
+                                    <p className="text-xl font-bold mb-4">{error}</p>
+                                    <Button
+                                        onClick={loadEvents}
+                                        className="mech-button rounded-none bg-black text-white hover:bg-primary"
+                                    >
+                                        Retry
+                                    </Button>
+                                </div>
+                            </div>
+                        )}
+
+                        {/* Empty State */}
+                        {!loading && !error && events.length === 0 && (
+                            <div className="text-center py-20">
+                                <div className="border-4 border-black bg-white p-12 inline-block">
+                                    <p className="text-2xl font-bold">No events yet!</p>
+                                    <p className="text-gray-600 mt-2">Check back soon for upcoming events.</p>
+                                </div>
+                            </div>
+                        )}
+
+                        {/* Events Grid */}
+                        {!loading && !error && events.length > 0 && (
+                            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                                {events.map((event) => (
+                                    <Card
+                                        key={event.id}
+                                        className="group hover:-translate-y-2 transition-transform duration-300 flex flex-col h-full cursor-pointer"
+                                        onClick={() => setSelectedEvent(event)}
+                                    >
+                                        <CardHeader className="border-b-2 border-black bg-background/50 relative overflow-hidden p-0">
+                                            {event.image_url && (
+                                                <div className="w-full h-48 overflow-hidden border-b-2 border-black">
+                                                    <img
+                                                        src={event.image_url}
+                                                        alt={event.title}
+                                                        className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                                                    />
+                                                </div>
+                                            )}
+                                            <div className="p-6 pb-2">
+                                                <CardTitle className="text-2xl leading-tight mb-2">
+                                                    {event.title}
+                                                </CardTitle>
+                                                <div className="flex items-center gap-2">
+                                                    <span className={cn(
+                                                        "px-2 py-0.5 text-xs font-bold border border-black uppercase",
+                                                        event.category === "Hackathon" && "bg-primary text-white",
+                                                        event.category === "Workshop" && "bg-secondary text-white",
+                                                        event.category === "Seminar" && "bg-accent text-black",
+                                                        event.category === "Conference" && "bg-muted text-black",
+                                                        event.category === "Cultural" && "bg-black text-white"
+                                                    )}>
+                                                        {event.category}
+                                                    </span>
+                                                </div>
                                             </div>
-                                            <div className="flex items-center gap-3">
-                                                <Clock className="w-5 h-5 text-secondary" />
-                                                <span className="font-mono text-xs uppercase">{event.time}</span>
+                                        </CardHeader>
+                                        <CardContent className="p-6 flex-grow flex flex-col justify-between">
+                                            <p className="font-mono text-sm mb-6 text-justify leading-relaxed line-clamp-3">
+                                                {event.description}
+                                            </p>
+
+                                            <div className="space-y-3 pt-4 border-t-2 border-dashed border-black/20 mt-auto">
+                                                <div className="flex items-center gap-3">
+                                                    <Calendar className="w-5 h-5 text-primary" />
+                                                    <span className="font-heading font-bold">{formatDate(event.date)}</span>
+                                                </div>
                                             </div>
-                                            <div className="flex items-center gap-3">
-                                                <MapPin className="w-5 h-5 text-accent" />
-                                                <span className="font-mono text-xs uppercase">{event.location}</span>
-                                            </div>
-                                        </div>
-                                    </CardContent>
-                                </Card>
-                            ))}
-                        </div>
+                                        </CardContent>
+                                    </Card>
+                                ))}
+                            </div>
+                        )}
                     </div>
                 </section>
             </main>
@@ -110,16 +167,13 @@ const Events = () => {
                     {selectedEvent && (
                         <>
                             <div className="max-h-[85vh] overflow-y-auto">
-                                {selectedEvent.image && (
+                                {selectedEvent.image_url && (
                                     <div className="w-full h-64 overflow-hidden border-b-2 border-black relative">
                                         <img
-                                            src={selectedEvent.image}
+                                            src={selectedEvent.image_url}
                                             alt={selectedEvent.title}
                                             className="w-full h-full object-cover"
                                         />
-                                        <div className="absolute top-4 right-4 bg-black text-white px-4 py-2 font-mono text-sm font-bold uppercase border-2 border-white shadow-lg">
-                                            {selectedEvent.status}
-                                        </div>
                                     </div>
                                 )}
 
@@ -142,26 +196,12 @@ const Events = () => {
                                         </DialogTitle>
                                     </DialogHeader>
 
-                                    <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8 border-y-2 border-black/10 py-6">
+                                    <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-8 border-y-2 border-black/10 py-6">
                                         <div className="flex flex-col gap-1">
                                             <span className="font-mono text-xs text-muted-foreground uppercase">Date</span>
                                             <div className="flex items-center gap-2 font-bold">
                                                 <Calendar className="w-4 h-4 text-primary" />
-                                                {selectedEvent.date}
-                                            </div>
-                                        </div>
-                                        <div className="flex flex-col gap-1">
-                                            <span className="font-mono text-xs text-muted-foreground uppercase">Time</span>
-                                            <div className="flex items-center gap-2 font-bold">
-                                                <Clock className="w-4 h-4 text-secondary" />
-                                                {selectedEvent.time}
-                                            </div>
-                                        </div>
-                                        <div className="flex flex-col gap-1">
-                                            <span className="font-mono text-xs text-muted-foreground uppercase">Location</span>
-                                            <div className="flex items-center gap-2 font-bold">
-                                                <MapPin className="w-4 h-4 text-accent" />
-                                                {selectedEvent.location}
+                                                {formatDate(selectedEvent.date)}
                                             </div>
                                         </div>
                                     </div>

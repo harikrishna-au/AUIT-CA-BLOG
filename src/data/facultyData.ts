@@ -1,39 +1,17 @@
+// Faculty interface matching backend API
 export interface Faculty {
+  id: string;
   name: string;
   designation: string;
-  qualification: string;
-  specialization: string | null;
+  department?: string;
   email?: string;
+  phone?: string;
+  specialization?: string;
+  image_url?: string;
+  created_at: string;
 }
 
-export const facultyData: Faculty[] = [
-  {
-    name: "Prof. D. Lalitha Bhaskari",
-    designation: "Professor & Head of the Department",
-    qualification: "Ph.D.",
-    specialization: "Security, Theory of Computation, Image Processing, Network Security and Cryptography"
-  },
-  {
-    name: "Dr. M. Ramjee",
-    designation: "Professor (Adjunct)",
-    qualification: "Ph.D.",
-    specialization: "Machine Learning, Data Mining"
-  },
-  {
-    name: "Prof. Gogula Suvarna Kumar",
-    designation: "Professor (Adhoc)",
-    qualification: "Ph.D",
-    specialization: "AI, ML, Cyber security, Computer Networks, Entrepreneurship Development",
-    email: "Prof.gsuvarnakumar@andhrauniversity.edu.in"
-  },
-  {
-    name: "Mr. V. Nagaraju",
-    designation: "Assistant Professor (Contract)",
-    qualification: "M.C.A, M.Tech (CST)",
-    specialization: "Distributed Operating Systems, Operations Research, Data Mining & Data Warehousing"
-  }
-];
-
+// Leadership data (kept as static content)
 export const leadershipData = [
   {
     name: "Prof. D. Lalitha Bhaskari",
@@ -58,6 +36,7 @@ export const leadershipData = [
   }
 ];
 
+// Programs data (kept as static content)
 export const programsData = {
   undergraduate: [
     {
