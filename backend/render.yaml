@@ -7,6 +7,7 @@ services:
     rootDir: backend
     buildCommand: pip install -r requirements.txt
     startCommand: gunicorn app:app --bind 0.0.0.0:$PORT
+    pythonVersion: "3.12"
     envVars:
       - key: SUPABASE_URL
         sync: false
