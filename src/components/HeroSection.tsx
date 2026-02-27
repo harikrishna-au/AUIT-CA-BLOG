@@ -90,7 +90,7 @@ export function HeroSection() {
 
             <div className="mb-2 overflow-hidden">
               <h1 className="hero-line font-heading font-bold text-5xl md:text-7xl lg:text-8xl leading-[0.9] tracking-tighter uppercase">
-                Information
+                ITT
               </h1>
             </div>
             <div className="mb-2 overflow-hidden">
